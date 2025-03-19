@@ -1,0 +1,27 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "ITPM project backend",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IT21282904/ITPM.git"
+  },
+  "author": "Y3S1-WD-43",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IT21282904/ITPM/issues"
+  },
+  "homepage": "https://github.com/IT21282904/ITPM#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.12.1",
+    "nodemon": "^3.1.9"
+  }
+}
