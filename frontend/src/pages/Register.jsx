@@ -1,28 +1,41 @@
-import axios from 'axios';
+
 
 
 const message = {
   "uID": '',
   "uName": '',
   "password": '',
-  "isAdmin": true
+  "isAdmin": false
 };
 let i = 1;
 
 
 
-const fetchData =  (e) => {
+const fetchData =  async (e) => {
   e.preventDefault();
   message.uID = document.getElementById('uID').value;
   message.uName = document.getElementById('uName').value;
   message.password = document.getElementById('password').value;
-  message.isAdmin =  document.getElementById('isAdmin').value === 'true';
+  
+
+  console.log(message);
+  
   try {
-    const res = axios.post('/api/add-user',message);
-    console.log(res.data);
-  } catch (err) {
-    console.error('Error fetching data:', err);
-  }
+    let response = await fetch('http://localhost:5000/add-user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(message)
+    });
+
+    let data = response.json;
+    console.log(data);
+
+}
+catch(error){
+  console.log(error);
+}
 };
 
 const Register = () => {
@@ -74,10 +87,9 @@ const Register = () => {
                   onClick={()=>{ 
                       i++;
                       if(i%2 === 0){
-                        document.getElementById('isAdmin').value = 'true';
+                        message.isAdmin = true;
                       }
-                      else 
-                      document.getElementById('isAdmin').value = 'false';
+                      
                   }} />
                   <label class="form-check-label" for="acceptTerms">Register as an admin </label>
 
