@@ -3,7 +3,7 @@ const UserSchema = require("../models/userM")
 exports.addUser = async (req, res) => {
     console.log("route 1 is running");
     const {uID,uName,password,isAdmin}  = req.body
-    console.log("name "+req.body.uName);
+   // console.log("name "+req.body.uName);
     const user = UserSchema({
         uID,
         uName,
@@ -27,7 +27,7 @@ exports.addUser = async (req, res) => {
         }
         
         await user.save()
-        res.status(200).json({message: 'User Added'})
+        res.status(200).json({message: 'User Added',uName:req.body.uName})
     } catch (error) {
         console.error(error);
         res.status(500).json({message: 'Server Error1'})
