@@ -46,9 +46,10 @@ exports.logIn = async (req, res) =>{
         }
         const filter ={uName: req.body.uName}
         const userRes = await UserSchema.findOne(filter)
-        if(userRes[password] === req.body.password){
+        console.log(userRes.uName);
+        if(userRes.password === req.body.password){
             isLogedIn.isLoged = true;
-            isLogedIn.isAdmin = userRes[isAdmin];
+            isLogedIn.isAdmin = userRes.isAdmin;
         res.status(200).json(isLogedIn)
         }
     } catch (error) {
