@@ -1,4 +1,4 @@
-
+import Swal from 'sweetalert2';
 
 
 const message = {
@@ -6,6 +6,12 @@ const message = {
   "uName": '',
   "password": '',
   "isAdmin": false
+};
+
+
+const success = () => {
+  
+;
 };
 let i = 1;
 
@@ -18,7 +24,7 @@ const fetchData =  async (e) => {
   message.password = document.getElementById('password').value;
   
 
-  console.log(message);
+  
   
   try {
     let response = await fetch('http://localhost:5000/add-user', {
@@ -29,8 +35,16 @@ const fetchData =  async (e) => {
       body: JSON.stringify(message)
     });
 
-    let data = response.json;
-    console.log(data);
+    let data = await response.json();
+    if(response.status == 200) {Swal.fire({
+      title: 'User Created!',
+      text: 'The user has been registered successfully.',
+      icon: 'success',
+      confirmButtonText: 'Okay'
+    })}
+    else{
+      Swal.fire('Oops!', data.message, 'error');
+    }
 
 }
 catch(error){
@@ -53,7 +67,7 @@ const Register = () => {
           <div class="card-body">
 
             <div class="pt-4 pb-2">
-              <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
+              <h5 class="card-title text-center pb-0 fs-4" style={{margin:'20%',marginTop:'7%'}}>Create an Account</h5>
               <p class="text-center small">Enter your personal details to create account</p>
             </div>
 
@@ -76,7 +90,7 @@ const Register = () => {
               </div>
 
               <div class="col-12">
-                <label for="yourPassword" class="form-label">Password</label>
+                <label for="password" class="form-label">Password</label>
                 <input type="password" name="password" class="form-control" id="password" required/>
                 <div class="invalid-feedback">Please enter your password!</div>
               </div>
@@ -89,9 +103,11 @@ const Register = () => {
                       if(i%2 === 0){
                         message.isAdmin = true;
                       }
+                      else
+                        message.isAdmin = false;
                       
                   }} />
-                  <label class="form-check-label" for="acceptTerms">Register as an admin </label>
+                  <label class="form-check-label" for="isAdmin">Register as an admin </label>
 
                 </div>
               </div>

@@ -14,8 +14,8 @@ exports.addUser = async (req, res) => {
     try {
         //validations
         const {uID,uName,password,isAdmin}  = req.body
-        if(!uID || !uName || !password || !isAdmin){
-            return res.status(400).json({message: 'All fields are required!'})
+        if(!uID || !uName || !password || isAdmin == null){
+            return res.status(400).json({"message": 'All fields are required!'})
         }
         try {
             let Exsists = await UserSchema.findOne({uName: req.body.uName},{ password: 0 });
